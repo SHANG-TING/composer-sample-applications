@@ -11,12 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Component } from 'react';
-import '../../../stylesheets/css/main.css';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Table from '../../Table/Table.js';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import '../../../stylesheets/css/main.css';
 import Config from '../../../utils/config';
+import Table from '../../Table/Table.js';
 
 class EllaPage extends Component {
   constructor(props) {
@@ -143,7 +143,6 @@ class EllaPage extends Component {
 		  	<tr onClick={() => this.openLetter(i)}>
 		  		<td className="purpleText">{this.state.letters[i].letterId}</td>
 		  		<td>{submitter}</td>
-		  		<td>{company}</td>
 		  		<td>
             {status.status}
           </td>
@@ -163,7 +162,8 @@ class EllaPage extends Component {
     }
 
     if(this.state.userDetails.name && !this.state.gettingLetters) {
-      let username = this.state.userDetails.name + ", Employee at " + this.state.userDetails.bank;
+      // let username = this.state.userDetails.name + ", Employee at " + this.state.userDetails.bank;
+      let username = `${this.state.userDetails.name}, 你好`;
 
       let rowsJSX = [];
       if(this.state.letters.length) {
@@ -172,14 +172,21 @@ class EllaPage extends Component {
         }
       }
 
+      const spanStyle = {
+        position: 'absolute',
+        right: 0,
+        margin: '15px 30px 0 0',
+      };
+
       return (
         <div id="ellaPageContainer" className="ellaPageContainer">
           <div id="ellaHeaderDiv" className="flexDiv ellaHeaderDiv">
             <span className="ellaUsername"> {username} </span>
+            <span style={spanStyle} > 醫院管理人員 </span>
           </div>
           <div id="ellaWelcomeDiv" className="ellaWelcomeDiv">
-            <span> {this.state.userDetails.bank} </span>
-            <h1> Welcome back {this.state.userDetails.name} </h1>
+            <span>哈瑪星醫院</span>
+            <h1> {this.state.userDetails.name}, 歡迎使用 </h1>
           </div>
           <div id="tableDiv">
             <Table rows={rowsJSX} styling={"ellaTable"}/>

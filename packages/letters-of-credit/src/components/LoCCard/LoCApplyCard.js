@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../../stylesheets/css/main.css';
 
@@ -33,12 +33,22 @@ class LoCApplyCard extends Component {
     if (this.state.redirect) {
       return <Redirect push to={this.props.user + "/loc/create"} />;
     }
+
+    if (this.props.user === 'bob') {
+      return (
+          <div className="LoCCard noBorder">
+            <h2>就診文件</h2>
+            <p></p>
+          </div>
+      );
+    }
+
     return (
       <div className="LoCCard noBorder">
-        <h2>{this.props.user === 'alice' ? 'Letter of Credit Application' : 'Letter of Credit Applications'}</h2>
-        <p>A letter of credit is issued by a bank to another bank (especially one in a different country) to serve as a guarantee for payments made to a specified person under specified conditions.</p>
+        <h2>{this.props.user === 'alice' ? '申請理賠' : '理賠清單'}</h2>
+        <p>透過區塊鏈技術來簡化申請流程。</p>
         {this.props.user === 'alice' && 
-          <button className="viewButton applyButton" onClick={() => this.handleOnClick()}>Apply for a Letter of Credit</button>
+          <button className="viewButton applyButton" onClick={() => this.handleOnClick()}>開始申請</button>
         }
       </div>
     );

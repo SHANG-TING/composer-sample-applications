@@ -74,22 +74,22 @@ class Modal extends Component {
       if(this.props.modalType === 'SHIP') {
         content = (
           <div>
-            <h4 id="titleText" className="textMargins title">Upload an Invoice</h4>
+            <h4 id="titleText" className="textMargins title">上傳證明文件</h4>
             <table className="files-table">
               <tr>
                 <td>
                   <label class="checkboxContainer">
                     <input type="checkbox" checked={this.state.isChecked} onChange={this.handleChange}/>
                     <span class="checkmark"></span>
-                    shipping-invoice.pdf
+                    diagnosisRecord.pdf
                   </label>
                 </td>
               </tr>
             </table>
             { this.state.isLoading && <p class="loadingMessage">Please wait... </p> }
             <div id="buttonsRow" className="shipButtonsRow">
-              <button disabled={!this.state.isChecked || this.state.isLoading} className="yesButton" onClick={this.uploadInvoiceCallback}>Upload</button>
-              <button className="cancelButton" onClick={this.cancelShipCallback}>Cancel</button>
+              <button disabled={!this.state.isChecked || this.state.isLoading} className="yesButton" onClick={this.uploadInvoiceCallback}>上傳</button>
+              <button className="cancelButton" onClick={this.cancelShipCallback}>取消</button>
             </div>
           </div>
         );

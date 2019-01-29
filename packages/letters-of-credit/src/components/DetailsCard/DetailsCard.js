@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 import React, { Component } from 'react';
-import '../../stylesheets/css/main.css';
 import { connect } from "react-redux";
-import { getProductDeatils } from "../../actions/actions";
-import { getRules } from "../../actions/actions";
+import { getProductDeatils, getRules } from "../../actions/actions";
+import '../../stylesheets/css/main.css';
 
 class DetailsCard extends Component {
   constructor(props) {
@@ -61,16 +60,12 @@ class DetailsCard extends Component {
       case 'Person':
         jsx = (
           <div>
-            <span class="subheadingSpan, topHeading">NAME</span>
+            <span class="subheadingSpan, topHeading">{this.props.usertype === 'Doctors' ? '醫師姓名' : '姓名'}</span>
             <span class="subheadingSpan">{this.state.data[1]}</span>
-            <span class="subheadingSpan, topHeading">COMPANY NAME</span>
-            <span class="subheadingSpan">{this.state.data[2]}</span>
-            <span class="subheadingSpan, topHeading">IBAN</span>
+            <span class="subheadingSpan, topHeading">{this.props.usertype === 'Doctors' ? '醫師編號' : '保險號碼'}</span>
             <span class="subheadingSpan">{this.state.data[3]}</span>
-            <span class="subheadingSpan, topHeading">SWIFT CODE</span>
+            <span class="subheadingSpan, topHeading">{this.props.usertype === 'Doctors' ? '科別代號' : '產品'}</span>
             <span class="subheadingSpan">{this.state.data[4]}</span>
-            <span class="subheadingSpan, topHeading">BANK NAME</span>
-            <span class="subheadingSpan">{this.state.data[5]}</span>
           </div>
         );
         break;
@@ -86,14 +81,12 @@ class DetailsCard extends Component {
 
         jsx = (
           <div>
-            <span class="subheadingSpan, topHeading">TYPE</span>
+            <span class="subheadingSpan, topHeading">理賠類別</span>
             { (this.state.editable) ? <input class="subheadingSpan" type="text" onChange={this.handleChange.bind(this, 1)} defaultValue={this.state.data[1]} /> : <span class="subheadingSpan">{this.state.data[1]}</span> }
-            <span class="subheadingSpan, topHeading">QUANTITY</span>
+            <span class="subheadingSpan, topHeading">理賠項目</span>
             { (this.state.editable) ? <input class="subheadingSpan" type="number" min="0" onChange={this.handleChange.bind(this, 2)} defaultValue={this.state.data[2]} /> : <span class="subheadingSpan">{this.state.data[2] ? this.state.data[2] : "0"}</span> }
-            <span class="subheadingSpan, topHeading">PRICE PER UNIT</span>
+            <span class="subheadingSpan, topHeading">理賠內容說明</span>
             { (this.state.editable) ? <input class="subheadingSpan" type="number" min="0" onChange={this.handleChange.bind(this, 3)} defaultValue={this.state.data[3]} /> : <span class="subheadingSpan">{currency + (this.state.data[3] ? amount.toLocaleString(undefined, {minimumFractionDigits: 2}) : "0.00")}</span> }
-            <span class="subheadingSpan, topHeading">TOTAL</span>
-            <span class="subheadingSpan">{currency + (this.state.data[2]*amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
           </div>
         );
         break;

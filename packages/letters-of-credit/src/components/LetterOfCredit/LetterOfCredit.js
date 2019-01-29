@@ -11,18 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Component } from 'react';
-import '../../stylesheets/css/main.css';
-import { Redirect } from 'react-router-dom';
-import DetailsCard from '../DetailsCard/DetailsCard.js';
-import BlockChainDisplay from '../BlockChainDisplay/BlockChainDisplay.js';
 import axios from 'axios';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import { getProductDeatils } from "../../actions/actions";
-import Config from '../../utils/config';
-import backButtonIcon from '../../resources/images/left-arrow.svg'
+import Modal from '../../components/Modal/Modal.js';
 import Stepper from '../../components/Stepper/Stepper.js';
-import Modal from '../../components/Modal/Modal.js'
+import backButtonIcon from '../../resources/images/left-arrow.svg';
+import '../../stylesheets/css/main.css';
+import Config from '../../utils/config';
+import BlockChainDisplay from '../BlockChainDisplay/BlockChainDisplay.js';
+import DetailsCard from '../DetailsCard/DetailsCard.js';
 
 class LetterOfCredit extends Component {
   constructor(props) {
@@ -353,8 +353,8 @@ class LetterOfCredit extends Component {
       if (isAwaitingApproval) {
         buttonJSX = (
           <div class="actions">
-            <button disabled={this.state.disableButtons} onClick={() => {this.showModal('REJECT')}}>I reject the application</button>
-            <button disabled={this.state.disableButtons} onClick={() => {this.showModal('APPROVE')}}>I accept the application</button>
+            <button disabled={this.state.disableButtons} onClick={() => {this.showModal('REJECT')}}>退件</button>
+            <button disabled={this.state.disableButtons} onClick={() => {this.showModal('APPROVE')}}>接受申請</button>
           </div>
         );
       } else if (this.state.letter.status === 'RECEIVED' && this.state.user === 'matias') {
@@ -375,7 +375,7 @@ class LetterOfCredit extends Component {
     } else {
       buttonJSX = (
         <div class="actions">
-          <button disabled={this.state.disableButtons || this.props.productDetails.type === "" || this.props.productDetails.quantity === 0 || this.props.productDetails.pricePerUnit === 0} onClick={() => {this.showModal('CREATE')}}>Start approval process</button>
+          <button disabled={this.state.disableButtons || this.props.productDetails.type === "" || this.props.productDetails.quantity === 0 || this.props.productDetails.pricePerUnit === 0} onClick={() => {this.showModal('CREATE')}}>送出申請</button>
         </div>
       );
     }
@@ -394,18 +394,18 @@ class LetterOfCredit extends Component {
             <div>
               <img class="backButton" src={backButtonIcon} alt="go back" onClick={() => {if(!this.state.disableButtons){this.handleOnClick(this.state.user)}}}/>
             </div>
-            <p class="loc-text">Letter of Credit</p>
+            <p class="loc-text"></p>
             <p class="username-txt">{username}</p>
           </div>
           <table className="contentTable">
             <tr>
-              <td> <h1>Contract Details</h1> </td>
-              <td colspan="2"> <Stepper steps= {['Letter Application','BoD\'s Approval','EB\'s Approval','Bob\'s Approval','Goods Shipped','Shipment Accepted','Payment Made','Letter Closed']} activeStep={activeStep}/> </td>  
+              <td> <h1>理賠狀態</h1> </td>
+              <td colspan="2"> <Stepper steps= {['Letter Application','BoD\'s Approval','EB\'s Approval','Bob\'s Approval','Goods Shipped','Shipment Accepted','Payment Made','理賠完成']} activeStep={activeStep}/> </td>  
             </tr>
             <tr>
-              <td> <DetailsCard disabled={true} type="Person" data={["Application Request"].concat(Object.values(this.props.applicant))}/> </td>
-              <td> <DetailsCard disabled={true} type="Person" data={["Supplier Request"].concat(Object.values(this.props.beneficiary))}/> </td>
-              <td> <DetailsCard type="Product" data={["Product Details"].concat(Object.values(productDetails))} canEdit={this.state.isApply} user={this.state.user}/> </td>
+              <td> <DetailsCard disabled={true} type="Person" usertype="User" data={["申請人"].concat(Object.values(this.props.applicant))}/> </td>
+              <td> <DetailsCard disabled={true} type="Person" usertype="Doctors" data={["就診醫院"].concat(Object.values(this.props.beneficiary))}/> </td>
+              <td> <DetailsCard type="Product" data={["診斷證明"].concat(Object.values(productDetails))} canEdit={this.state.isApply} user={this.state.user}/> </td>
               <td className="blockchainCell" rowspan="2"> <BlockChainDisplay transactions={this.state.transactions}/> </td>
             </tr>
             <tr>

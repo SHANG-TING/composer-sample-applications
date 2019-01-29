@@ -19,15 +19,14 @@ class Table extends Component {
   	return(
   		<div id="tableContainer" className={this.props.styling}>
   			<div id="headerBar" className="headerBar">
-  				<span className="locOrdersText"> Letters of Credit Applications </span>
+  				<span className="locOrdersText"> 理賠清單 </span>
   			</div>
   			<table className="bankTable">
   				<tbody>
   					<tr className="tableHeaders">
   						<th>Ref number</th>
-  						<th>Applicant Name</th>
-  						<th>Business Account</th>
-  						<th>Status</th>
+  						<th>姓名</th>
+  						<th>狀態</th>
   					</tr>
   					{this.props.rows}
   				</tbody>

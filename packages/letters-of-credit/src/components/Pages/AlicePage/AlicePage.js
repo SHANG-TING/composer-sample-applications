@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Component } from 'react';
-import '../../../stylesheets/css/main.css';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import UserDetails from '../../UserDetails/UserDetails.js';
-import LoCCard from '../../LoCCard/LoCCard.js';
-import LoCApplyCard from '../../LoCCard/LoCApplyCard.js';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import '../../../stylesheets/css/main.css';
 import Config from '../../../utils/config';
+import LoCApplyCard from '../../LoCCard/LoCApplyCard.js';
+import LoCCard from '../../LoCCard/LoCCard.js';
+import UserDetails from '../../UserDetails/UserDetails.js';
 
 class AlicePage extends Component {
   constructor(props) {
@@ -110,7 +110,8 @@ class AlicePage extends Component {
     }
 
 		if(this.state.userDetails.name && !this.state.gettingLetters) {
-			let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bank;
+			// let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bank;
+			let username = `${this.state.userDetails.name}, 你好`;
 
     	let cardsJSX = [];
     	if(this.state.letters.length) {
@@ -125,15 +126,11 @@ class AlicePage extends Component {
     		  <div id="aliceHeaderDiv" className="flexDiv aliceHeaderDiv">
     		    <span className="aliceUsername">{username}</span>
     		    <div id="aliceMenu" className="aliceMenuItems">
-    		      <span> Change account details </span>
-    		      <span> View Transaction History </span>
-    		      <span> Make Transaction </span>
-    		      <span className="currentBalance"> Current Balance: €15,276.00 </span>
     		    </div>
     		  </div>
     		  <div id="infoDiv" className="flexDiv infoDiv">
     		    <div id="aliceWelcomeDiv" className="aliceWelcomeDiv">
-    		      <h1 className = "aliceWelcomeMessage"> Welcome back {this.state.userDetails.name} </h1>
+    		      <h1 className = "aliceWelcomeMessage"> {this.state.userDetails.name}, 歡迎使用 </h1>
     		      <UserDetails name={this.state.userDetails.name} companyName={this.state.userDetails.companyName} IBAN={'IT60 9876 5321 9090'} swiftCode={'BKDOIT60'}/>
 						</div>
 					</div>

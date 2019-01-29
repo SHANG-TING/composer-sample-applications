@@ -11,15 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
-import Config from '../../utils/config';
-import '../../stylesheets/css/main.css';
 import axios from 'axios';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import "react-toggle/style.css";
+import viewArrow from '../../resources/images/right-arrow.svg';
+import '../../stylesheets/css/main.css';
+import Config from '../../utils/config';
 import Modal from '../Modal/Modal.js';
-import viewArrow from '../../resources/images/right-arrow.svg'
 
 class LoCCard extends Component {
   constructor(props) {
@@ -116,7 +116,7 @@ class LoCCard extends Component {
             <p>Product Type: <b>{letter.productDetails.productType}</b></p>
             <div className = "toggleContainer hide">
               <Toggle className='customToggle' defaultChecked={false} disabled/>
-              <span className="shipText">Ship Product</span>
+              <span className="shipText">上傳證明文件</span>
             </div>
           </div>
           <img class="viewButtonBob" src={viewArrow} alt="View Letter of Credit" onClick={() => this.handleOnClick()}/>

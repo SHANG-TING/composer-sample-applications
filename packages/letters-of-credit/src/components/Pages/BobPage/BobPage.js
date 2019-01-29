@@ -11,15 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Component } from 'react';
-import '../../../stylesheets/css/main.css';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Alert from '../../Alert/Alert.js'
-import UserDetails from '../../UserDetails/UserDetails.js';
-import LoCCard from '../../LoCCard/LoCCard.js';
-import LoCApplyCard from '../../LoCCard/LoCApplyCard.js';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import '../../../stylesheets/css/main.css';
 import Config from '../../../utils/config';
+import Alert from '../../Alert/Alert.js';
+import LoCApplyCard from '../../LoCCard/LoCApplyCard.js';
+import LoCCard from '../../LoCCard/LoCCard.js';
+import UserDetails from '../../UserDetails/UserDetails.js';
 
 class BobPage extends Component {
   constructor(props) {
@@ -142,7 +142,8 @@ class BobPage extends Component {
     }
 
 		if(this.state.userDetails.name && !this.state.gettingLetters) {
-			let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bank;
+			// let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bank;
+			let username = `${this.state.userDetails.name}, 你好`;
 
     	let cardsJSX = [];
     	if(this.state.letters.length) {
@@ -150,16 +151,24 @@ class BobPage extends Component {
 					cardsJSX.push(this.generateCard(i));
 				}
 				cardsJSX.push(<div className="cardSpace">&nbsp;</div>);
-			}
+      }
+      
+      const spanStyle = {
+        position: 'absolute',
+        right: 0,
+        margin: '30px',
+        color: 'white'
+      };
 
       return (
         <div id="bobPageContainer" className="bobPageContainer">
           <div id="bobHeaderDiv" className="flexDiv bobHeaderDiv">
             <span className="bobUsername"> {username} </span>
+            <span style={spanStyle} > 主治醫師 </span>
           </div>
           <div class="bobWelcomeDiv">
-            <p id="welcomeMessage">Welcome back {this.state.userDetails.name}</p>
-            <h1 id ="accountBalance">${this.getBalance().toLocaleString()}</h1>
+            <p id="welcomeMessage"></p>
+            <h1 id ="accountBalance"></h1>
             <Alert amount={this.getBalanceIncrease().toLocaleString(undefined, {minimumFractionDigits: 2})} show={this.state.alert}/>
           </div>
           <div id="infoDivBob" className="flexDiv infoDivBob">

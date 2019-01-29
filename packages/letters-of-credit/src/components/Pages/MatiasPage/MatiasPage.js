@@ -11,13 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Component } from 'react';
-import '../../../stylesheets/css/main.css';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Table from '../../Table/Table.js';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import '../../../stylesheets/css/main.css';
 import Config from '../../../utils/config';
-import matiasUsernameIcon from '../../../resources/images/viewLocIcon.png';
+import Table from '../../Table/Table.js';
 
 class MatiasPage extends Component {
   constructor(props) {
@@ -143,7 +142,6 @@ class MatiasPage extends Component {
 			<tr className="row" onClick={() => this.openLetter(i) }>
 				<td className="blueText">{this.state.letters[i].letterId}</td>
 				<td>{submitter}</td>
-				<td>{company}</td>
         <td>
           {status.status}
         </td>
@@ -160,7 +158,8 @@ class MatiasPage extends Component {
     }
 
     if(this.state.userDetails.name && !this.state.gettingLetters) {
-      let username = this.state.userDetails.name + ", Employee at " + this.state.userDetails.bank;
+      // let username = this.state.userDetails.name + ", Employee at " + this.state.userDetails.bank;
+      let username = `${this.state.userDetails.name}, 你好`;
 
       let rowsJSX = [];
       if(this.state.letters.length) {
@@ -169,14 +168,21 @@ class MatiasPage extends Component {
         }
       }
 
+      const spanStyle = {
+        position: 'absolute',
+        right: 0,
+        margin: '30px 100px 0 0',
+      };
+
       return (
         <div id="matiasPageContainer" className="matiasPageContainer">
           <div id="matiasHeaderDiv" className="flexDiv matiasHeaderDiv">
             <span className="matiasUsername">{username}</span>
-            <span>Viewing All Business Acccounts</span>
+            <span>X</span>
+            < span style={spanStyle} > 理賠專員 </span>
           </div>
           <div id="matiasWelcomeDiv" className="matiasWelcomeDiv">
-            <h1> Welcome back {this.state.userDetails.name} </h1>
+            <h1>{this.state.userDetails.name} 歡迎使用</h1>
           </div>
           <div id="tableDiv">
             <Table rows={rowsJSX} styling={"matiasTable"}/>

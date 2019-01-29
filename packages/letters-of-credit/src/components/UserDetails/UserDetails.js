@@ -28,11 +28,10 @@ class UserDetails extends Component {
   render() {
     return (
       <div className="UserDetails">
-        <h2>Business Account Details</h2>
-        <div>Name: <b>{this.state.name}</b></div>
-        <div>Company Name: <b>{this.state.companyName}</b></div>
-        <div>IBAN: <b>{this.state.IBAN}</b></div>
-        <div>SWIFT code: <b>{this.state.swiftCode}</b></div>
+        <h2>帳號資訊</h2>
+        <div>姓名: <b>{this.state.name}</b></div>
+        <div>醫師代號: <b>{this.state.IBAN}</b></div>
+        <div>科別代號: <b>{this.state.swiftCode}</b></div>
       </div>
     );
   }
